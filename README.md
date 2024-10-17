@@ -155,7 +155,7 @@ train_df = pd.get_dummies(train_df, columns=cols)
 test_df = pd.get_dummies(test_df,columns=cols)
 ```
 
-6). Lastly, Scaled using **RobustScaler**
+6). Lastly, Scaled datasets using **RobustScaler**
 ```
 scaler =RobustScaler()
 X_scaled = scaler.fit_transform(X)
