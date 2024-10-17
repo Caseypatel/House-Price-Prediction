@@ -1,4 +1,4 @@
-# House Price Prediction
+<h1 align="center"> House Price Prediction </h1>
 ## Context:
 - The objective of this project is to develop a **Machine Learning model** capable of predicting house sale prices based on various relevant features. 
 - The dataset comprises **79 explanatory variables** that provide comprehensive insights into nearly every aspect of residential properties in Ames, Iowa.
