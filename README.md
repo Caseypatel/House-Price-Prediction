@@ -24,7 +24,7 @@ In this project I developed a Function to Train Model using Different Regression
   - The RMSE Score of 0.137 indicated a low average error in the model's predictions.
 - And predicted test data. 
 
-# EDA:   
+## EDA:   
 1). Analyzed & visualized **target variable (SalePrice)**
       <p style="margin-top:15px;">
            <img src="https://github.com/user-attachments/assets/dd8e78f5-68a9-48db-9448-32f5e11d174a">
@@ -53,7 +53,7 @@ In this project I developed a Function to Train Model using Different Regression
 - Features like **WoodDeckSF,LotDrontage,and MasVnrArea** were having **modearte relation** with the target varible.
 - Features like **LowQualFinSF,MiscVal,BsmtFinSF2,PoolArea,3SsnPorch,and ScreenPorch** were having very **low relation** with the target variable.
 
-# Feature Engieering 
+## Feature Engieering 
 
 1). Created Two New Features **"RenovationStatus" and "AgeAtSale"** of the House and visualized with avg sales price
        <p style="margin-top:15px;">
@@ -117,7 +117,7 @@ test_df.drop(columns=["Condition1","Condition2","Combined_Condition"],inplace=Tr
 **Results:**
 - All these features seemed very useful for model training.
 
-# Data Processing 
+## Data Processing 
 
 1). Performed **Log Transformation** on target variable.
 
@@ -162,7 +162,7 @@ X_scaled = scaler.fit_transform(X)
 test_df = scaler.fit_transform(test_df)
 ```
 
-# Model creation & evalution
+## Model creation & evalution
 - Created a **Function** to Train Model using Different Regression Algorithms.
   -  Linear Regression Model
   -  Support vector Regressor Model
@@ -179,7 +179,7 @@ test_df = scaler.fit_transform(test_df)
 **Result:**
 - Applied hyper-parameter tunning to the best performing model **CatBoostRegressor, GradientBoostingRegressor & LGBMRegressor models**
 
-# Lastly, stacked three models for the robust model
+## Lastly, stacked three models for the robust model
 ```
 stack_model = StackingCVRegressor(regressors=(catboost_model,gradient_model,lgbm_model),
                                   meta_regressor = catboost_model,
@@ -190,7 +190,7 @@ stack_model = StackingCVRegressor(regressors=(catboost_model,gradient_model,lgbm
 - The RMSE Score of 0.137 indicated a low average error in the model's predictions.
 - The Adjusted R2 Score of 0.756 accounted for the number of predictors in the model, providing a reliable measure of its performance.
 
-# Predicted Test Datset using Stacked Model
+## Predicted Test Datset using Stacked Model
 ```
 test_preds = stack_model.predict(test_df)
 sdf = test_id.to_frame()
