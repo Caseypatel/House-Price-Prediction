@@ -9,63 +9,72 @@
 
 ## Actions:
 In this project I developed a Function to Train Model using Different Regression Algorithms. Then, applied different alogrothims to the datasets. Here are the key steps:
-- Performed **EDA** on target variable, continuous numeric features, categorical features to determine the skewness.
-  
+
+1). Performed EDA on target variable, continuous numeric features, categorical features to determine the skewness.
+2). Performed Feature Engineering for the robustness of the model.
+3). Next Step was to perform LabelEncoding, One Hot Coding and Scaled data using RobustScaler.
+4). Created a function to Train Model using Different Regression Algorithms.
+5). Finally, created a model and based on results applied hyper parameter tunning and then staked a model.
+6). Predicted test data using stacked model rewrite this in professsional way and in first person
+
+# EDA:   
     1). Analyzed & visualized **target variable (SalePrice)**
-    <p style="margin-top:15px;">
+      <p style="margin-top:15px;">
            <img src="https://github.com/user-attachments/assets/dd8e78f5-68a9-48db-9448-32f5e11d174a">
-    </p>
+      </p>
     **Results**:
      - The target feature is **right-skewed distribution** due to positive Outliers.
-     - To achieve a Normal Distribution I used different transformation techniques like: Johnsonsu Transformation, Norm Transformation or Log Noraml Transformation
-      ![image](https://github.com/user-attachments/assets/e19e1157-3d10-4c99-96b2-16ca0a15a101)
+     - To achieve a Normal Distribution I used different transformation techniques like: Johnsonsu Transformation, Norm Transformation or Log Normal Transformation
+        <p style="margin-top:15px;">
+            <img src="https://github.com/user-attachments/assets/bbd9a80e-2f24-42d2-a64f-7a855f940da2">
+        </p>
      - After applying different transformation techniques the best result were given by Unbounded Johnson Transformation.
 
     2). Then, I visualized the Skewness of **Continous Numerical Features**
-    <p style="margin-top:15px;">
+      <p style="margin-top:15px;">
           <img src="https://github.com/user-attachments/assets/e2ed33ff-4c51-4794-9356-9239023f3dd8">
-    </p>
+      </p>
     **Results**:
      - Features like **3SsnPorch,LowQualFinSF,LotArea,PoolArea and MiscVal** were having extremly high skewness which can create model-complexity.
     
     3). I visualized **Correlation of Continous Numerical Features** w.r.t SalesPrice.
-    <p style="margin-top:15px;">
+      <p style="margin-top:15px;">
            <img src="https://github.com/user-attachments/assets/8a2e0bc9-004d-4b11-aded-e2c636354028">
-    </p>
+      </p>
     **Results:**
      - Features like **1stFlrSF,GrLivArea,and GarageArea** were having **strong relation** with the target variable.
      - Features like **WoodDeckSF,LotDrontage,and MasVnrArea** were having **modearte relation** with the target varible.
      - Features like **LowQualFinSF,MiscVal,BsmtFinSF2,PoolArea,3SsnPorch,and ScreenPorch** were having very **low relation** with the target variable.
 
- - I performed **Feature Engineering** for the robustness of the model.
+# Feature Engieering 
 
     1). Created Two New Features **"RenovationStatus" and "AgeAtSale"** of the House and visualized with avg sales price
-     <p style="margin-top:15px;">
+       <p style="margin-top:15px;">
         <img src ="https://github.com/user-attachments/assets/7c2854db-a959-4783-bc31-d47a7e046859">
-     </p>
+       </p>
    **Results:**
      - The SalePrice for both the RenovationStatus cateegory is approxiamately same.
      - There is a negative correlation between **AgeAtScale & SalePrice.** So this new feature seems very useful for model training.
 
     2). Creating a New Feature "TotalBathrooms" using all the columns storing "Bathroom Values".
-     <p style="margin-top:15px;">
+       <p style="margin-top:15px;">
         <img src="https://github.com/user-attachments/assets/ed28ebc7-cd00-4e80-887d-8362781b8176">
-     </p>
+       </p>
    **Results:**
       - We can clearly observe a strong positive correlation between **Total Bathrooms and SalePrice.**
         
     3). Next, I created **Total_Porch_SF** using all the columns related to "porch".
-      <p style="margin-top:15px;">
+        <p style="margin-top:15px;">
              <img src="https://github.com/user-attachments/assets/0effc8f8-a548-41cf-87df-802f97365934">
-      </p>
+        </p>
    **Results:**
       - Feature like **OpenPorchSF,WoodDeckSF and Total_Porch_SF** were having moderate correlation. Those features were useful.
       - Feature like **3SsnPorch,EnclosedPorch, and ScreenPorch** were having weak correlation. And dropped those features.
 
     4). Created a new feature **Total_sqr_footage** by adding all  "Sqaure Footage" variables.
-   <p style="margin-top:15px;">
+       <p style="margin-top:15px;">
              <img src="https://github.com/user-attachments/assets/3bdaa903-0057-4536-bac5-422b6c62cf99">
-   </p>
+       </p>
     **Results:**
      - The new feature **Total_sqr_footage and 1stFlrSF** were having very **high correlation** with the target varibale.
      - Features like **BsmtFinSF1,TotalBsmtSF, and 2ndFlrSF** were having **modearte correlation** with the target variable.
@@ -94,9 +103,27 @@ In this project I developed a Function to Train Model using Different Regression
      ```
 
     7). Lastly, created **boolean features**
-   <p style="margin-top:15px;">
+       <p style="margin-top:15px;">
         <img src="https://github.com/user-attachments/assets/679ef468-2098-4220-82ee-dc88f90caf29">
-   </p>
+       </p>
+    **Results:**
+     - All these features seemed very useful for model training.
+
+# Data Processing 
+     1). Performed **Log Transformation** on target variable. 
+     ![image](https://github.com/user-attachments/assets/a21af503-2716-4a95-9706-8156c6c89bac)
+     **Results:**
+     - We can clearly observe that SalePrice has been transformed to a **normal distribution.** 
+
+     2) Then, applied Box-Cox Transformation on Continous Numerical Features to Reduce Skewness.
+     ```
+     train_df[con_cols].skew().sort_values().to_frame().rename(columns={0:"Skewness"}).T
+     ```
+     3). 
+
+
+
+
 
                                                                       
 
