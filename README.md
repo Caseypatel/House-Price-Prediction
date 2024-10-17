@@ -9,14 +9,101 @@
 
 ## Actions:
 In this project I developed a Function to Train Model using Different Regression Algorithms. Then, applied different alogrothims to the datasets. Here are the key steps:
-- Performed EDA on target variable, continuous numeric features, categorical features to determine the skewness.
-    1). Analyzed & visualized target variable (SalePrice)
-           ![image](https://github.com/user-attachments/assets/dd8e78f5-68a9-48db-9448-32f5e11d174a)
+- Performed **EDA** on target variable, continuous numeric features, categorical features to determine the skewness.
+  
+    1). Analyzed & visualized **target variable (SalePrice)**
+    <p style="margin-top:15px;">
+           <img src="https://github.com/user-attachments/assets/dd8e78f5-68a9-48db-9448-32f5e11d174a">
+    </p>
     **Results**:
      - The target feature is **right-skewed distribution** due to positive Outliers.
      - To achieve a Normal Distribution I used different transformation techniques like: Johnsonsu Transformation, Norm Transformation or Log Noraml Transformation
       ![image](https://github.com/user-attachments/assets/e19e1157-3d10-4c99-96b2-16ca0a15a101)
      - After applying different transformation techniques the best result were given by Unbounded Johnson Transformation.
+
+    2). Then, I visualized the Skewness of **Continous Numerical Features**
+    <p style="margin-top:15px;">
+          <img src="https://github.com/user-attachments/assets/e2ed33ff-4c51-4794-9356-9239023f3dd8">
+    </p>
+    **Results**:
+     - Features like **3SsnPorch,LowQualFinSF,LotArea,PoolArea and MiscVal** were having extremly high skewness which can create model-complexity.
+    
+    3). I visualized **Correlation of Continous Numerical Features** w.r.t SalesPrice.
+    <p style="margin-top:15px;">
+           <img src="https://github.com/user-attachments/assets/8a2e0bc9-004d-4b11-aded-e2c636354028">
+    </p>
+    **Results:**
+     - Features like **1stFlrSF,GrLivArea,and GarageArea** were having **strong relation** with the target variable.
+     - Features like **WoodDeckSF,LotDrontage,and MasVnrArea** were having **modearte relation** with the target varible.
+     - Features like **LowQualFinSF,MiscVal,BsmtFinSF2,PoolArea,3SsnPorch,and ScreenPorch** were having very **low relation** with the target variable.
+
+ - I performed **Feature Engineering** for the robustness of the model.
+
+    1). Created Two New Features **"RenovationStatus" and "AgeAtSale"** of the House and visualized with avg sales price
+     <p style="margin-top:15px;">
+        <img src ="https://github.com/user-attachments/assets/7c2854db-a959-4783-bc31-d47a7e046859">
+     </p>
+   **Results:**
+     - The SalePrice for both the RenovationStatus cateegory is approxiamately same.
+     - There is a negative correlation between **AgeAtScale & SalePrice.** So this new feature seems very useful for model training.
+
+    2). Creating a New Feature "TotalBathrooms" using all the columns storing "Bathroom Values".
+     <p style="margin-top:15px;">
+        <img src="https://github.com/user-attachments/assets/ed28ebc7-cd00-4e80-887d-8362781b8176">
+     </p>
+   **Results:**
+      - We can clearly observe a strong positive correlation between **Total Bathrooms and SalePrice.**
+        
+    3). Next, I created **Total_Porch_SF** using all the columns related to "porch".
+      <p style="margin-top:15px;">
+             <img src="https://github.com/user-attachments/assets/0effc8f8-a548-41cf-87df-802f97365934">
+      </p>
+   **Results:**
+      - Feature like **OpenPorchSF,WoodDeckSF and Total_Porch_SF** were having moderate correlation. Those features were useful.
+      - Feature like **3SsnPorch,EnclosedPorch, and ScreenPorch** were having weak correlation. And dropped those features.
+
+    4). Created a new feature **Total_sqr_footage** by adding all  "Sqaure Footage" variables.
+   <p style="margin-top:15px;">
+             <img src="https://github.com/user-attachments/assets/3bdaa903-0057-4536-bac5-422b6c62cf99">
+   </p>
+    **Results:**
+     - The new feature **Total_sqr_footage and 1stFlrSF** were having very **high correlation** with the target varibale.
+     - Features like **BsmtFinSF1,TotalBsmtSF, and 2ndFlrSF** were having **modearte correlation** with the target variable.
+     - Features like **BsmtFinSF2 and BsmtUnfSF** were having very weak correaltion witht the target variable and **dropped those featues.**
+
+    5). Created a New Feature **"condition"** using **"Condition1" & "Condition2".**
+   ```def condition(df):
+    df["Condition2"] = df["Condition2"].replace({"Norm":""}) #Norm means normal which indicates there's no second condition
+    combined_condition = []
+    for val1,val2 in zip(df["Condition1"],df["Condition2"]):
+        if val2 == "":
+            combined_condition.append(val1)
+        elif val1==val2:
+            combined_condition.append(val1)
+        else:
+            combined_condition.append(val1+val2)
+            
+    df["Combined_Condition"] = combined_condition
+    df["ProximityStatus"] = (df["Combined_Condition"] == "Norm").astype(int)
+   ```
+
+    6). Created a new feature **"Heating"** using the other features such as **"Heating" and "HeatingQC"**
+      ```
+        train_df.drop(columns=["Condition1","Condition2","Combined_Condition"],inplace=True)
+        test_df.drop(columns=["Condition1","Condition2","Combined_Condition"],inplace=True)
+     ```
+
+    7). Lastly, created **boolean features**
+   <p style="margin-top:15px;">
+        <img src="https://github.com/user-attachments/assets/679ef468-2098-4220-82ee-dc88f90caf29">
+   </p>
+
+                                                                      
+
+   
+
+
+
 
 
 
