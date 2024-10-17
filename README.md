@@ -20,8 +20,8 @@ In this project I developed a Function to Train Model using Different Regression
 ## Results:
 - The best performing models were **CatBoostRegressor, GradientBoostingRegressor & LGBMRegressor.**
 - Applied **hyper-parameter tuning** to the models and stacked those models to create a more robust model.
-      - The model demonstrated a strong correlation (R2 Score) of 0.876 between predicted and actual house prices.
-      - The RMSE Score of 0.137 indicated a low average error in the model's predictions.
+  - The model demonstrated a strong correlation (R2 Score) of 0.876 between predicted and actual house prices.
+  - The RMSE Score of 0.137 indicated a low average error in the model's predictions.
 - And predicted test data. 
 
 # EDA:   
@@ -118,8 +118,10 @@ test_df.drop(columns=["Condition1","Condition2","Combined_Condition"],inplace=Tr
 - All these features seemed very useful for model training.
 
 # Data Processing 
-1). Performed **Log Transformation** on target variable. 
-     ![image](https://github.com/user-attachments/assets/a21af503-2716-4a95-9706-8156c6c89bac)
+
+1). Performed **Log Transformation** on target variable.
+
+![image](https://github.com/user-attachments/assets/a21af503-2716-4a95-9706-8156c6c89bac)
 **Results:**
 - We can clearly observe that SalePrice has been transformed to a **normal distribution.** 
 
