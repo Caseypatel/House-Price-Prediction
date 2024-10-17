@@ -16,6 +16,7 @@ In this project I developed a Function to Train Model using Different Regression
      - The target feature is **right-skewed distribution** due to positive Outliers.
      - To achieve a Normal Distribution I used different transformation techniques like: Johnsonsu Transformation, Norm Transformation or Log Noraml Transformation
       ![image](https://github.com/user-attachments/assets/e19e1157-3d10-4c99-96b2-16ca0a15a101)
+     - After applying different transformation techniques the best result were given by Unbounded Johnson Transformation.
 
 
 
