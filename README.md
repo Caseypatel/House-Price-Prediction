@@ -179,7 +179,7 @@ test_df = scaler.fit_transform(test_df)
 **Result:**
 - Applied hyper-parameter tunning to the best performing model **CatBoostRegressor, GradientBoostingRegressor & LGBMRegressor models**
 
-# Lastly, stacked three models for the best outcome
+# Lastly, stacked three models for the robust model
 ```
 stack_model = StackingCVRegressor(regressors=(catboost_model,gradient_model,lgbm_model),
                                   meta_regressor = catboost_model,
